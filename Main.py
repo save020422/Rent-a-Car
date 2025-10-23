@@ -1,99 +1,107 @@
 import flet as ft
-import time
-import threading
-
-def show_main_ui(page: ft.Page):
-    # --- Tourists Tab ---
-    tourist_name = ft.TextField(label="Name")
-    passport_number = ft.TextField(label="Passport Number")
-    add_tourist_btn = ft.ElevatedButton("Add Tourist")
-
-    tourist_tab = ft.Column([
-        ft.Text("Add Tourist", size=20, weight="bold"),
-        tourist_name,
-        passport_number,
-        add_tourist_btn
-    ])
-
-    # --- Cars Tab ---
-    license_plate = ft.TextField(label="License Plate")
-    brand = ft.TextField(label="Brand")
-    model = ft.TextField(label="Model")
-    color = ft.TextField(label="Color")
-    add_car_btn = ft.ElevatedButton("Add Car")
-
-    car_tab = ft.Column([
-        ft.Text("Add Car", size=20, weight="bold"),
-        license_plate,
-        brand,
-        model,
-        color,
-        add_car_btn
-    ])
-
-    # --- Contracts Tab ---
-    tourist_id = ft.TextField(label="Tourist ID")
-    car_id = ft.TextField(label="Car ID")
-    payment_method = ft.Dropdown(
-        label="Payment Method",
-        options=[
-            ft.dropdown.Option("cash"),
-            ft.dropdown.Option("check"),
-            ft.dropdown.Option("credit_card")
-        ]
-    )
-    start_date = ft.TextField(label="Start Date (YYYY-MM-DD)")
-    end_date = ft.TextField(label="End Date (YYYY-MM-DD)")
-    extension_days = ft.TextField(label="Extension Days")
-    with_driver = ft.Switch(label="With Driver")
-    total_amount = ft.TextField(label="Total Amount")
-    add_contract_btn = ft.ElevatedButton("Add Contract")
-
-    contract_tab = ft.Column([
-        ft.Text("Add Rental Contract", size=20, weight="bold"),
-        tourist_id,
-        car_id,
-        payment_method,
-        start_date,
-        end_date,
-        extension_days,
-        with_driver,
-        total_amount,
-        add_contract_btn
-    ])
-
-    # --- Tabs Layout ---
-    tabs = ft.Tabs(
-        selected_index=0,
-        tabs=[
-            ft.Tab(text="Tourists", content=tourist_tab),
-            ft.Tab(text="Cars", content=car_tab),
-            ft.Tab(text="Contracts", content=contract_tab)
-        ],
-        expand=True
-    )
-
-    page.controls.clear()
-    page.add(tabs)
-    page.update()
 
 def main(page: ft.Page):
-    page.title = "Rent a Car"
-    page.bgcolor = ft.Colors.YELLOW
-    splash = ft.Text("Rent a Car", size=40, weight="bold", color=ft.Colors.BLUE_600)
-    page.add(
-        ft.Column(
-            [splash],
-            alignment=ft.MainAxisAlignment.CENTER,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            expand=True
-        )
+    page.title = "Sistema de Alquiler de Autos"
+    page.theme_mode = "light"
+
+    # Ejemplo de datos agregados (puedes conectar con una base de datos luego)
+    turistas = [
+        ft.Text("Ana Torres - Pasaporte: 123456 - Veces: 2 - Total: $500"),
+        ft.Text("Luis Gómez - Pasaporte: 789012 - Veces: 1 - Total: $300")
+    ]
+
+    autos = [
+        ft.Text("Placa: ABC123 - Toyota Corolla - Rojo - 15,000 km"),
+        ft.Text("Placa: XYZ789 - Kia Rio - Azul - 8,000 km")
+    ]
+
+    contratos = [
+        ft.Text("Ana Torres - ABC123 - Efectivo - 2023-01-01 a 2023-01-05 - Chofer: No - Total: $500"),
+        ft.Text("Luis Gómez - XYZ789 - Tarjeta - 2023-02-01 a 2023-02-03 - Chofer: Sí - Total: $300")
+    ]
+
+    # 🧍 Turistas
+    tab_turistas = ft.Tab(
+        text="Turistas",
+        content=ft.Column([
+            ft.Text("Gestión de Turistas", size=20, weight="bold"),
+            ft.TextField(label="Nombre del turista"),
+            ft.TextField(label="Número de pasaporte"),
+            ft.Row([
+                ft.ElevatedButton("Agregar"),
+                ft.ElevatedButton("Editar"),
+                ft.ElevatedButton("Eliminar"),
+            ]),
+            ft.Container(
+                content=ft.Column(turistas),
+                bgcolor=ft.Colors.GREY_200,
+                padding=10,
+                border_radius=15,
+                margin=10
+            )
+        ])
     )
 
-    def delayed_start():
-        time.sleep(3)
-        show_main_ui(page)
+    # 🚗 Autos
+    tab_autos = ft.Tab(
+        text="Autos",
+        content=ft.Column([
+            ft.Text("Gestión de Autos", size=20, weight="bold"),
+            ft.TextField(label="Placa"),
+            ft.TextField(label="Marca"),
+            ft.TextField(label="Modelo"),
+            ft.TextField(label="Color"),
+            ft.TextField(label="Kilómetros recorridos"),
+            ft.Row([
+                ft.ElevatedButton("Agregar"),
+                ft.ElevatedButton("Editar"),
+                ft.ElevatedButton("Eliminar"),
+            ]),
+            ft.Container(
+                content=ft.Column(autos),
+                bgcolor=ft.Colors.GREY_200,
+                padding=10,
+                border_radius=15,
+                margin=10
+            )
+        ])
+    )
 
-    threading.Thread(target=delayed_start).start()
+    # 📄 Contratos
+    tab_contratos = ft.Tab(
+        text="Contratos",
+        content=ft.Column([
+            ft.Text("Gestión de Contratos", size=20, weight="bold"),
+            ft.TextField(label="Nombre del turista"),
+            ft.TextField(label="Placa del auto"),
+            ft.TextField(label="Forma de pago"),
+            ft.TextField(label="Fecha inicio"),
+            ft.TextField(label="Fecha fin"),
+            ft.TextField(label="Prórroga (días)"),
+            ft.Switch(label="Alquiler de chofer"),
+            ft.TextField(label="Importe total"),
+            ft.Row([
+                ft.ElevatedButton("Agregar"),
+                ft.ElevatedButton("Editar"),
+                ft.ElevatedButton("Eliminar"),
+            ]),
+            ft.Container(
+                content=ft.Column(contratos),
+                bgcolor=ft.Colors.GREY_200,
+                padding=10,
+                border_radius=15,
+                margin=10
+            )
+        ])
+    )
+
+    # 🗂️ Tabs principales
+    page.add(
+        ft.Tabs(
+            selected_index=0,
+            tabs=[tab_turistas, tab_autos, tab_contratos],
+            expand=1
+        )
+    )
 
 ft.app(target=main)
