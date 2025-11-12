@@ -1,35 +1,27 @@
-# 🧍‍♂️ Tourist
+
 
 class Tourist:
-    def __init__(self, name, passport_number):
+    def __init__(self, name ="", passport_number = "",country = ""):
         self.name = name
         self.passport_number = passport_number
         self.times_used_cars = 0
         self.total_rental_value = 0.0
+        self.country = country
 
-class Country:
-    def __init__(self, name):
-        self.name = name
-        self.tourists = []
 
-    def add_tourist(self, tourist):
-        self.tourists.append(tourist)
 
-# 🚗 Car
+
 class Car:
-    def __init__(self, license_plate, brand, model, color):
+    def __init__(self, license_plate, brand, model, color,status):
         self.license_plate = license_plate
         self.brand = brand
         self.model = model
         self.color = color
         self.kilometers_driven = 0
+        self.carstatus = status
 
 
-class CarStatus:
-    def __init__(self, car, status, contract_end_date=None):
-        self.car = car
-        self.status = status  # 'available', 'rented', 'in_repair'
-        self.contract_end_date = contract_end_date
+
 
 
 class RentalContract:
@@ -52,37 +44,14 @@ class ContractViolator:
 
     def is_violation(self):
         return self.actual_return_date > self.contract_end_date
+    
 
-# 📈 Brand & Model Summary
-class BrandModelSummary:
-    def __init__(self, brand, model):
-        self.brand = brand
-        self.model = model
-        self.car_count = 0
-        self.total_rental_days = 0
-        self.credit_income = 0.0
-        self.check_income = 0.0
-        self.cash_income = 0.0
+class InfoManager:
+    def __init__(self):
+        self.turistas = []
+        self.autos = []
+        self.contratos = []
+        
+        
+        pass
 
-    def total_income(self):
-        return self.credit_income + self.check_income + self.cash_income
-
-# 🌐 Country Summary
-class CountrySummary:
-    def __init__(self, country):
-        self.country = country
-        self.brand_model_data = {}  # {(brand, model): data}
-
-    def add_data(self, brand, model, rental_days, extension_days, cash_value, total_value):
-        key = (brand, model)
-        if key not in self.brand_model_data:
-            self.brand_model_data[key] = {
-                'rental_days': 0,
-                'extension_days': 0,
-                'cash_value': 0.0,
-                'total_value': 0.0
-            }
-        self.brand_model_data[key]['rental_days'] += rental_days
-        self.brand_model_data[key]['extension_days'] += extension_days
-        self.brand_model_data[key]['cash_value'] += cash_value
-        self.brand_model_data[key]['total_value'] += total_value

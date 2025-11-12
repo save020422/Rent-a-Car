@@ -1,86 +1,142 @@
-import flet as ft 
-
-# it 's module is for create the users inteface 
-
+import flet as ft
+import Inter 
+# Sección de Turistas
 def users_seccion():
-       tabs_turistas = ft.Tab(
-        text="Turistas",
-        content=ft.Column([
-            ft.Text("Gestión de Turistas", size=20, weight="bold"),
-            ft.TextField(label="Nombre del turista"),
-            ft.TextField(label="Número de pasaporte"),
-            ft.Row([
-                ft.ElevatedButton("Agregar"),
-                ft.ElevatedButton("Editar"),
-                ft.ElevatedButton("Eliminar"),
-            ]),
-            ft.Container(
-                content=ft.Column(),
-                bgcolor=ft.Colors.GREY_200,
-                padding=10,
-                border_radius=15,
-                margin=10
-            )
-        ])
-    )
-       return tabs_turistas
-  
+    name = ft.TextField(label="Nombre del turista", height=40)
+    pasaporte =ft.TextField(label="Número de pasaporte", height=40)
+    nacionalidad = ft.TextField(label="Número de pasaporte", height=40)
+    sub_tabs = ft.Tabs(
 
-def cars_seccion():
-    tab_autos = ft.Tab(
-        text="Autos",
-        content=ft.Column([
-            ft.Text("Gestión de Autos", size=20, weight="bold"),
-            ft.TextField(label="Placa"),
-            ft.TextField(label="Marca"),
-            ft.TextField(label="Modelo"),
-            ft.TextField(label="Color"),
-            ft.TextField(label="Kilómetros recorridos"),
-            ft.Row([
-                ft.ElevatedButton("Agregar"),
-                ft.ElevatedButton("Editar"),
-                ft.ElevatedButton("Eliminar"),
-            ]),
-            ft.Container(
-                content=ft.Column(),
-                bgcolor=ft.Colors.GREY_200,
-                padding=10,
-                border_radius=15,
-                margin=10
+        
+        tabs=[
+            ft.Tab(
+                text="Formulario",
+                content=ft.Container(
+                    height=350,
+                    content=ft.Column([
+                        name,
+                        pasaporte,
+                        nacionalidad,
+                        
+                        ft.Row([
+                            ft.ElevatedButton("Agregar",on_click= lambda _ :  Inter.add_users(name_= name,
+                                                                                  passaport_= pasaporte,country_= nacionalidad)),
+                            ft.ElevatedButton("Editar"),
+                            ft.ElevatedButton("Eliminar"),
+                        ]),
+                        ft.Container(
+                            content=ft.Column(),
+                            bgcolor=ft.Colors.GREY_200,
+                            padding=5,
+                            border_radius=10,
+                            margin=5
+                        )
+                    ], scroll="auto")
+                )
+            ),
+            ft.Tab(
+                text="Listado",
+                content=ft.Container(
+                    content=ft.Column([
+                        ft.Text("Listado")
+                    ]),
+                    bgcolor=ft.Colors.GREY_100,
+                    padding=10,
+                    border_radius=10
+                )
             )
-        ])
+        ]
     )
-    return tab_autos 
-    pass 
+    return ft.Tab(text="Turistas", content=sub_tabs)
+
+
 
 def contrat_seccion():
-     tab_contratos = ft.Tab(
-        text="Contratos",
-        content=ft.Column([
-            ft.Text("Gestión de Contratos", size=20, weight="bold"),
-            ft.TextField(label="Nombre del turista"),
-            ft.TextField(label="Placa del auto"),
-            ft.TextField(label="Forma de pago"),
-            ft.TextField(label="Fecha inicio"),
-            ft.TextField(label="Fecha fin"),
-            ft.TextField(label="Prórroga (días)"),
-            ft.Switch(label="Alquiler de chofer"),
-            ft.TextField(label="Importe total"),
-            ft.Row([
-                ft.ElevatedButton("Agregar"),
-                ft.ElevatedButton("Editar"),
-                ft.ElevatedButton("Eliminar"),
-            ]),
-            ft.Container(
-                content=ft.Column(),
-                bgcolor=ft.Colors.GREY_200,
-                padding=10,
-                border_radius=15,
-                margin=10
+    sub_tabs = ft.Tabs(
+        tabs=[
+            ft.Tab(text="Formulario",
+                content=ft.Container(
+                    height=400,
+                    content=ft.Column([
+                        ft.Text("Gestión de Contratos", size=18, weight="bold"),
+                        ft.TextField(label="Nombre del turista", height=40),
+                        ft.TextField(label="Placa del auto", height=40),
+                        ft.TextField(label="Forma de pago", height=40),
+                        ft.TextField(label="Fecha inicio", height=40),
+                        ft.TextField(label="Fecha fin", height=40),
+                        ft.TextField(label="Prórroga (días)", height=40),
+                        ft.Switch(label="Alquiler de chofer"),
+                        ft.TextField(label="Importe total", height=40),
+                        ft.Row([
+                            ft.ElevatedButton("Agregar"),
+                            ft.ElevatedButton("Editar"),
+                            ft.ElevatedButton("Eliminar"),
+                        ]),
+                        ft.Container(
+                            content=ft.Column(),
+                            bgcolor=ft.Colors.GREY_200,
+                            padding=5,
+                            border_radius=10,
+                            margin=5
+                        )
+                    ], scroll="auto")
+                )
+            ),
+            ft.Tab(
+                text="Listado",
+                content=ft.Container(
+                    content=ft.Column([
+                        ft.Text("Listado")
+                    ]),
+                    bgcolor=ft.Colors.GREY_100,
+                    padding=10,
+                    border_radius=10
+                )
             )
-        ])
+        ]
     )
-     return tab_contratos
+    return ft.Tab(text="Contratos", content=sub_tabs)
 
-
-    
+def cars_seccion():
+    sub_tabs = ft.Tabs(
+        tabs=[
+            ft.Tab(
+                text="Formulario",
+                content=ft.Container(
+                    height=400,
+                    content=ft.Column([
+                        ft.Text("Gestión de Autos", size=18, weight="bold"),
+                        ft.TextField(label="Placa", height=40),
+                        ft.TextField(label="Marca", height=40),
+                        ft.TextField(label="Modelo", height=40),
+                        ft.TextField(label="Color", height=40),
+                        ft.TextField(label="Kilómetros recorridos", height=40),
+                        ft.Row([
+                            ft.ElevatedButton("Agregar"),
+                            ft.ElevatedButton("Editar"),
+                            ft.ElevatedButton("Eliminar"),
+                        ]),
+                        ft.Container(
+                            content=ft.Column(),
+                            bgcolor=ft.Colors.GREY_200,
+                            padding=5,
+                            border_radius=10,
+                            margin=5
+                        )
+                    ], scroll="auto")
+                )
+            ),
+            ft.Tab(
+                text="Listado",
+                content=ft.Container(
+                    content=ft.Column([
+                        ft.Text("Listado")
+                    ]),
+                    bgcolor=ft.Colors.GREY_100,
+                    padding=10,
+                    border_radius=10
+                )
+            )
+        ]
+    )
+    return ft.Tab(text="Autos", content=sub_tabs)
