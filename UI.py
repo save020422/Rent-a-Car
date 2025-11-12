@@ -1,13 +1,14 @@
 import flet as ft
 import Inter 
 # Sección de Turistas
-def users_seccion():
+def users_seccion(page):
     name = ft.TextField(label="Nombre del turista", height=40)
-    pasaporte =ft.TextField(label="Número de pasaporte", height=40)
-    nacionalidad = ft.TextField(label="Número de pasaporte", height=40)
-    sub_tabs = ft.Tabs(
+    pasaporte = ft.TextField(label="Número de pasaporte", height=40)
+    nacionalidad = ft.TextField(label="Nacionalidad", height=40)
 
-        
+    datos = ["Turista 1", "Turista 2", "Turista 3"]  # Asegúrate de definir 'datos'
+
+    sub_tabs = ft.Tabs(
         tabs=[
             ft.Tab(
                 text="Formulario",
@@ -17,10 +18,13 @@ def users_seccion():
                         name,
                         pasaporte,
                         nacionalidad,
-                        
                         ft.Row([
-                            ft.ElevatedButton("Agregar",on_click= lambda _ :  Inter.add_users(name_= name,
-                                                                                  passaport_= pasaporte,country_= nacionalidad)),
+                            ft.ElevatedButton("Agregar", on_click=lambda _: Inter.add_users(
+                                page,
+                                name_=name,
+                                passaport_=pasaporte,
+                                country_=nacionalidad
+                            )),
                             ft.ElevatedButton("Editar"),
                             ft.ElevatedButton("Eliminar"),
                         ]),
@@ -38,7 +42,10 @@ def users_seccion():
                 text="Listado",
                 content=ft.Container(
                     content=ft.Column([
-                        ft.Text("Listado")
+                        ft.Text("Listado"),
+                        ft.Column(
+                            controls=[ft.Text(Inter.lista_de_usuarios) for item in datos]
+                        )
                     ]),
                     bgcolor=ft.Colors.GREY_100,
                     padding=10,
@@ -47,7 +54,9 @@ def users_seccion():
             )
         ]
     )
+
     return ft.Tab(text="Turistas", content=sub_tabs)
+
 
 
 

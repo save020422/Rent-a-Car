@@ -10,7 +10,7 @@ def main(page: ft.Page):
     page.add(
         ft.Tabs(
             selected_index=0,
-            tabs=[Ui.users_seccion(), Ui.contrat_seccion(), Ui.cars_seccion()],
+            tabs=[Ui.users_seccion(page), Ui.contrat_seccion(), Ui.cars_seccion()],
             expand=1
         )
     )

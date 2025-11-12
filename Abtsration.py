@@ -2,7 +2,7 @@
 
 class Tourist:
     def __init__(self, name ="", passport_number = "",country = ""):
-        self.name = name
+        self.name_ = name
         self.passport_number = passport_number
         self.times_used_cars = 0
         self.total_rental_value = 0.0
