@@ -1,10 +1,12 @@
 import flet as ft
-import Inter 
+from Abtsration import Tourist , SpecialContainer, SpecialEntry
 # Sección de Turistas
-def users_seccion(page):
-    name = ft.TextField(label="Nombre del turista", height=40)
-    pasaporte = ft.TextField(label="Número de pasaporte", height=40)
-    nacionalidad = ft.TextField(label="Nacionalidad", height=40)
+def users_seccion(page,user_data  = ""):
+    rad = int(10)
+    tourist_entry = Tourist()
+    tourist_entry.name = SpecialEntry(label="Nombre del turista", height=40 ,border_radius=rad)
+    tourist_entry.pasaporte = SpecialEntry(label="Número de pasaporte", height=40,border_radius=rad)
+    tourist_entry.nacionalidad = SpecialEntry(label="Nacionalidad", height=40,border_radius=rad)
 
     datos = ["Turista 1", "Turista 2", "Turista 3"]  # Asegúrate de definir 'datos'
 
@@ -15,16 +17,11 @@ def users_seccion(page):
                 content=ft.Container(
                     height=350,
                     content=ft.Column([
-                        name,
-                        pasaporte,
-                        nacionalidad,
+                        tourist_entry.name,
+                        tourist_entry.pasaporte,
+                        tourist_entry.nacionalidad,
                         ft.Row([
-                            ft.ElevatedButton("Agregar", on_click=lambda _: Inter.add_users(
-                                page,
-                                name_=name,
-                                passaport_=pasaporte,
-                                country_=nacionalidad
-                            )),
+                            ft.ElevatedButton("Agregar", on_click=lambda _: user_data.add_users(tourist_entry)),
                             ft.ElevatedButton("Editar"),
                             ft.ElevatedButton("Eliminar"),
                         ]),
@@ -40,11 +37,11 @@ def users_seccion(page):
             ),
             ft.Tab(
                 text="Listado",
-                content=ft.Container(
+                content=SpecialContainer(
                     content=ft.Column([
                         ft.Text("Listado"),
                         ft.Column(
-                            controls=[ft.Text(Inter.lista_de_usuarios) for item in datos]
+                            controls=[ft.Text(user_data.turistas) for item in datos]
                         )
                     ]),
                     bgcolor=ft.Colors.GREY_100,

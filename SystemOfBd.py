@@ -105,16 +105,25 @@ CREATE TABLE IF NOT EXISTS CountrySummary (
 """)
 
 # Commit and close
-def add_tourist(name, passport_number, times_used_cars=0, total_rental_value=0.0):
-    db_path = os.path.join("SrcDataBase", "database.db")
-    connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
-    cursor.execute("""
-        INSERT INTO Tourist (name, passport_number, times_used_cars, total_rental_value)
-        VALUES (?, ?, ?, ?)
-    """, (name, passport_number, times_used_cars, total_rental_value))
-    connection.commit()
-    connection.close()
+
+# this class use staticmethod for gestion the tourist class in  data base
+class TouristBd:
+
+    @staticmethod
+    def add_tourist(turista):
+        db_path = os.path.join("SrcDataBase", "database.db")
+        connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute("""
+            INSERT INTO Tourist (name, passport_number, times_used_cars, total_rental_value)
+            VALUES (?, ?, ?, ?)
+        """, (turista.name, turista.passport_number, turista.times_used_cars, turista.nacionalidad))
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def delete_tourist():
+        pass
 
 def add_country(name):
     db_path = os.path.join("SrcDataBase", "database.db")
@@ -126,40 +135,45 @@ def add_country(name):
     connection.commit()
     connection.close()
 
-def add_car(license_plate, brand, model, color, kilometers_driven=0.0):
-    db_path = os.path.join("SrcDataBase", "database.db")
-    connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
-    cursor.execute("""
-        INSERT INTO Car (license_plate, brand, model, color, kilometers_driven)
-        VALUES (?, ?, ?, ?, ?)
-    """, (license_plate, brand, model, color, kilometers_driven))
-    connection.commit()
-    connection.close()
+class CarsBd:
+    
+    @staticmethod
+    def add_car(cars):
+        db_path = os.path.join("SrcDataBase", "database.db")
+        connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute("""
+            INSERT INTO Car (license_plate, brand, model, color, kilometers_driven)
+            VALUES (?, ?, ?, ?, ?)
+        """, (cars.license_plate, cars.brand, cars.model, cars.color, cars.status))
+        connection.commit()
+        connection.close()
 
-def add_car_status(car_id, status, contract_end_date=None):
-    db_path = os.path.join("SrcDataBase", "database.db")
-    connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
-    cursor.execute("""
-        INSERT INTO CarStatus (car_id, status, contract_end_date)
-        VALUES (?, ?, ?)
-    """, (car_id, status, contract_end_date))
-    connection.commit()
-    connection.close()
+    @staticmethod
+    def add_car_status(car_id, status, contract_end_date=None):
+        db_path = os.path.join("SrcDataBase", "database.db")
+        connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute("""
+            INSERT INTO CarStatus (car_id, status, contract_end_date)
+            VALUES (?, ?, ?)
+        """, (car_id, status, contract_end_date))
+        connection.commit()
+        connection.close()
 
-def add_rental_contract(tourist_id, car_id, payment_method, start_date, end_date, extension_days, with_driver, total_amount):
-    db_path = os.path.join("SrcDataBase", "database.db")
-    connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
-    cursor.execute("""
-        INSERT INTO RentalContract (
-            tourist_id, car_id, payment_method, start_date, end_date,
-            extension_days, with_driver, total_amount
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (tourist_id, car_id, payment_method, start_date, end_date, extension_days, int(with_driver), total_amount))
-    connection.commit()
-    connection.close()
+
+    def add_rental_contract(contrato):
+        db_path = os.path.join("SrcDataBase", "database.db")
+        connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute("""
+            INSERT INTO RentalContract (
+                tourist_id, car_id, payment_method, start_date, end_date,
+                extension_days, with_driver, total_amount
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (contrato.tourist_id, contrato.car_id, contrato.payment_method, contrato.start_date, contrato.end_date, contrato.extension_days, int(contrato.with_driver), contrato.total_amount))
+        connection.commit()
+        connection.close()
 
 def add_contract_violator(tourist_id, contract_end_date, actual_return_date):
     db_path = os.path.join("SrcDataBase", "database.db")
