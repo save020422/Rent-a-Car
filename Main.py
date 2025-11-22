@@ -1,5 +1,5 @@
 import flet as ft
-import Ui
+from ui import *
 from Abtsration import InfoManager
 
 def main(page: ft.Page):
@@ -12,9 +12,9 @@ def main(page: ft.Page):
     page.add(
         ft.Tabs(
             selected_index=0,
-            tabs=[Ui.users_seccion(page,user_data), 
-                  Ui.contrat_seccion(), 
-                  Ui.cars_seccion()],
+            tabs=[users_seccion(page,user_data), 
+                  contrat_seccion(), 
+                  cars_seccion()],
             expand=1,
             
         )
