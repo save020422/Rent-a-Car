@@ -15,6 +15,7 @@ def torist_seccion():
         content=ft.Column(
             controls=[tourist.name_,tourist.passport_number,tourist.country,
                       ft.ElevatedButton(text="Add",icon=ft.Icons.ADD),
+                      visual_data_table
                       ]
         )
        )

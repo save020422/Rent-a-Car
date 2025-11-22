@@ -12,9 +12,7 @@ def main(page: ft.Page):
     page.add(
         ft.Tabs(
             selected_index=0,
-            tabs=[users_seccion(page,user_data), 
-                  contrat_seccion(), 
-                  cars_seccion()],
+            tabs=[torist_seccion()],
             expand=1,
             
         )

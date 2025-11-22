@@ -55,14 +55,27 @@ class InfoManager:
         
         pass
 
+
+
 class ShowDataTable(ft.DataTable):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        
-        self.bgcolor = ft.Colors.BLUE
-        self.border(width= 2 ,colors = ft.Colors.BLUE)
-        self.columns = [
-            ft.DataColumn(ft.Text("passport_number",color=ft.Colors.BLUE)),
-            ft.DataColumn(ft.Text("name",color=ft.Colors.BLUE)),
-            ft.DataColumn(ft.Text("country",color=ft.Colors.BLUE))
+        columns = [
+            ft.DataColumn(ft.Text("passport_number", color=ft.Colors.WHITE)),
+            ft.DataColumn(ft.Text("name", color=ft.Colors.WHITE)),
+            ft.DataColumn(ft.Text("country", color=ft.Colors.WHITE))
         ]
+
+        super().__init__(
+            columns=columns,
+            border=ft.border.all(1, ft.Colors.GREY),
+            border_radius=12,
+            vertical_lines= ft.border.BorderSide(1, ft.Colors.GREY),
+            #data_row_color={"even": ft.Colors.BLUE_50, "odd": ft.Colors.WHITE},
+            divider_thickness=1,
+            column_spacing=20,
+            #heading_row_color=ft.Colors.BLUE_200,
+            **kwargs
+        )
+
+        #self.width = 10 # Limita el ancho de la tabla
+        #self.bgcolor = ft.Colors.BLUE_100
