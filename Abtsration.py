@@ -10,7 +10,7 @@ class Tourist:
 
 
 class Car:
-    def __init__(self, license_plate, brand, model, color,status):
+    def __init__(self, license_plate ="" , brand ="", model ="", color =" ",status=" "):
         self.license_plate = license_plate
         self.brand = brand
         self.model = model

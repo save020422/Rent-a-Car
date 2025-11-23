@@ -2,6 +2,8 @@ import sqlite3
 import os
 from Abtsration import * 
 
+#esta funcion es la uque construlle la base de datos
+#en la direccion deseada 
 def init():
     folder_path = "SrcDataBase"
     os.makedirs(folder_path, exist_ok=True)
@@ -14,6 +16,7 @@ def init():
     cursor = connection.cursor()
 
 # Create tables
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS Tourist (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,6 +29,9 @@ def init():
     connection.commit()
     connection.close()
 
+
+#esta clase es para organisar los metodos de una manera mas organisada 
+#mediante metodos estaticos 
 class TouristBD:
 
     @staticmethod
@@ -41,7 +47,7 @@ class TouristBD:
                 t.times_used_cars = row[2]
                 t.total_rental_value = row[3]
                 tourits_list.append(t)
-
+        
         except sqlite3.Error as e:
             print(f"Error al cargar turistas: {e}")
         finally:

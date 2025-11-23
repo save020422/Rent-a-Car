@@ -15,12 +15,7 @@ def main(page: ft.Page):
 
     
 
-    # Crear turistas
-    t1 = Tourist("Ana Pérez", "A123456", "Cuba")
-    t2 = Tourist("Luis Gómez", "B987654", "México")
-    t3 = Tourist("María Torres", "C456789", "Argentina")
-
-    user_data.turistas.extend([t1, t2, t3])
+    #
 
     # Crear la pestaña de usuarios
     users_tab = torist_seccion(infomanager=user_data )
