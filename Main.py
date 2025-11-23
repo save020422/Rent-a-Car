@@ -1,7 +1,7 @@
 import flet as ft
 from ui import *
 from Abtsration import InfoManager, Tourist
-
+import SystemOfBd as bd
 #page_init = [False] 
 
 def main(page: ft.Page):
@@ -9,6 +9,11 @@ def main(page: ft.Page):
     page.bgcolor = ft.Colors.BLUE_GREY_900
 
     user_data = InfoManager()
+    bd.init()
+    bd.TouristBD.insertar_turistas_demo()
+    bd.TouristBD.cargar_turistas(user_data.turistas)
+
+    
 
     # Crear turistas
     t1 = Tourist("Ana Pérez", "A123456", "Cuba")

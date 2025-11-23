@@ -3,12 +3,14 @@ import Abtsration as ab
 
 def torist_seccion(infomanager):
     tourist = ab.Tourist()
+    
+    # Campos de entrada estilizados
     tourist.name_ = ft.TextField(
-    label="Nombre del turista",
-    height=40,
-    text_style=ft.TextStyle(color=ft.Colors.WHITE),
-    label_style=ft.TextStyle(color=ft.Colors.WHITE)
-)
+        label="Nombre del turista",
+        height=40,
+        text_style=ft.TextStyle(color=ft.Colors.WHITE),
+        label_style=ft.TextStyle(color=ft.Colors.WHITE)
+    )
 
     tourist.passport_number = ft.TextField(
         label="Número de pasaporte",
@@ -24,11 +26,11 @@ def torist_seccion(infomanager):
         label_style=ft.TextStyle(color=ft.Colors.WHITE)
     )
 
-
+    # Tabla visual
     visual_data_table = ab.ShowDataTable()
     visual_data_table.import_cincro(infomanager=infomanager)
 
-    # Crear la columna con los controles centrados
+    # Columna con scroll
     column = ft.Column(
         controls=[
             tourist.name_,
@@ -41,22 +43,24 @@ def torist_seccion(infomanager):
             ),
             visual_data_table
         ],
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        scroll="auto",
+        expand=True
     )
 
-    # Llamar import_cincro después de agregar la tabla al layout
+    # Refrescar tabla al montar
     def on_column_mount(e):
         visual_data_table.import_cincro(infomanager)
 
     column.on_mount = on_column_mount
 
-    # Envolver la columna en una fila para centrarla horizontalmente
+    # Envolver en fila centrada
     return ft.Tab(
         text="Users",
         icon=ft.Icons.PEOPLE,
         content=ft.Row(
             controls=[column],
-            alignment=ft.MainAxisAlignment.CENTER
+            alignment=ft.MainAxisAlignment.CENTER,
+            expand=True
         )
     )
-
