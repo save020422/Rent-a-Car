@@ -80,7 +80,7 @@ class ShowDataTable(ft.DataTable):
         #self.width = 10 # Limita el ancho de la tabla
         #self.bgcolor = ft.Colors.BLUE_100
 
-    def add_data(self, entidad,infomanager):
+    def add_data(self, entidad,infomanager = ""):
     # Asegúrate de que 'entidad' tenga los atributos necesarios
         new_row = ft.DataRow(
             cells=[
@@ -100,9 +100,24 @@ class ShowDataTable(ft.DataTable):
         entidad.country.update()
 
         infomanager.turistas.append(tourits)
-        print(infomanager.turistas[0].name)
+        
 
 
         
         self.rows.append(new_row)
         self.update()
+    
+    def import_cincro(self, infomanager):
+        for turista in infomanager.turistas:
+            new_row = ft.DataRow(
+                cells=[
+                    ft.DataCell(ft.Text(turista.passport_number, color=ft.Colors.WHITE)),
+                    ft.DataCell(ft.Text(turista.name, color=ft.Colors.WHITE)),
+                    ft.DataCell(ft.Text(turista.country, color=ft.Colors.WHITE))
+                ]
+            )
+            self.rows.append(new_row)
+        self.update()
+
+
+        

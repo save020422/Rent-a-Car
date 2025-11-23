@@ -7,6 +7,7 @@ def torist_seccion(infomanager):
     tourist.country = ft.TextField(label="Nacionalidad", height=40)
 
     visual_data_table = ab.ShowDataTable()
+    #visual_data_table.import_cincro(infomanager)
     return ft.Tab(
 
         #CONFIGURATION OF THE TAB
