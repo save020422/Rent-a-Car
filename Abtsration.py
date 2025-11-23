@@ -4,8 +4,6 @@ class Tourist:
     def __init__(self, name ="", passport_number = "",country = ""):
         self.name = name
         self.passport_number = passport_number
-        self.times_used_cars = 0
-        self.total_rental_value = 0.0
         self.country = country
 
 
@@ -117,7 +115,7 @@ class ShowDataTable(ft.DataTable):
                 ]
             )
             self.rows.append(new_row)
-        self.update()
+        #self.update()
 
 
         
