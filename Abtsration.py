@@ -79,3 +79,30 @@ class ShowDataTable(ft.DataTable):
 
         #self.width = 10 # Limita el ancho de la tabla
         #self.bgcolor = ft.Colors.BLUE_100
+
+    def add_data(self, entidad,infomanager):
+    # Asegúrate de que 'entidad' tenga los atributos necesarios
+        new_row = ft.DataRow(
+            cells=[
+                ft.DataCell(ft.Text(entidad.passport_number.value,color=ft.Colors.WHITE)),
+                ft.DataCell(ft.Text(entidad.name_.value,color=ft.Colors.WHITE)),
+                ft.DataCell(ft.Text(entidad.country.value,color=ft.Colors.WHITE))
+            ]
+        )
+        tourits = Tourist(name=entidad.name_.value,
+                          passport_number=entidad.passport_number.value,
+                          country=entidad.country.value)
+                          
+        
+        entidad.passport_number.value = entidad.name_.value =  entidad.country.value = ""
+        entidad.name_.update()
+        entidad.passport_number.update()
+        entidad.country.update()
+
+        infomanager.turistas.append(tourits)
+        print(infomanager.turistas[0].name)
+
+
+        
+        self.rows.append(new_row)
+        self.update()

@@ -12,7 +12,7 @@ def main(page: ft.Page):
     page.add(
         ft.Tabs(
             selected_index=0,
-            tabs=[torist_seccion()],
+            tabs=[torist_seccion(infomanager=user_data)],
             expand=1,
             
         )
