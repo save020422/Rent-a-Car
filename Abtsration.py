@@ -159,9 +159,9 @@ class InfoManager:
 class ShowDataTable(ft.DataTable):
     def __init__(self, **kwargs):
         columns = [
-            ft.DataColumn(ft.Text("passport_number", color=ft.Colors.WHITE)),
-            ft.DataColumn(ft.Text("name", color=ft.Colors.WHITE)),
-            ft.DataColumn(ft.Text("country", color=ft.Colors.WHITE))
+            ft.DataColumn(ft.Text("passport_number")),
+            ft.DataColumn(ft.Text("name")),
+            ft.DataColumn(ft.Text("country"))
         ]
 
         super().__init__(
@@ -183,9 +183,9 @@ class ShowDataTable(ft.DataTable):
     # Asegúrate de que 'entidad' tenga los atributos necesarios
         new_row = ft.DataRow(
             cells=[
-                ft.DataCell(ft.Text(entidad.passport_number.value,color=ft.Colors.WHITE)),
-                ft.DataCell(ft.Text(entidad.name_.value,color=ft.Colors.WHITE)),
-                ft.DataCell(ft.Text(entidad.country.value,color=ft.Colors.WHITE))
+                ft.DataCell(ft.Text(entidad.passport_number.value)),
+                ft.DataCell(ft.Text(entidad.name_.value)),
+                ft.DataCell(ft.Text(entidad.country.value))
             ]
         )
         tourits = Tourist(name=entidad.name_.value,
@@ -213,9 +213,9 @@ class ShowDataTable(ft.DataTable):
         for turista in infomanager.turistas:
             new_row = ft.DataRow(
                 cells=[
-                    ft.DataCell(ft.Text(turista.passport_number, color=ft.Colors.WHITE)),
-                    ft.DataCell(ft.Text(turista.name, color=ft.Colors.WHITE)),
-                    ft.DataCell(ft.Text(turista.country, color=ft.Colors.WHITE))
+                    ft.DataCell(ft.Text(turista.passport_number)),
+                    ft.DataCell(ft.Text(turista.name)),
+                    ft.DataCell(ft.Text(turista.country))
                 ]
             )
             self.rows.append(new_row)
@@ -231,8 +231,8 @@ class MyColum(ft.Column):
       
 class InputBox(ft.TextField):
     def __init__(self,label ="",**kwargs):
-        super().__init__(text_align=ft.TextAlign.CENTER,label="",text_style=ft.TextStyle(color=ft.Colors.WHITE),
-                label_style=ft.TextStyle(color=ft.Colors.WHITE),height=30,width=300)
+        super().__init__(text_align=ft.TextAlign.CENTER,label="",
+                height=30,width=300)
         self.label = label
 
 

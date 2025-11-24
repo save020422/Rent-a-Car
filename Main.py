@@ -32,11 +32,14 @@ def main(page: ft.Page):
         page.update()
 
     # Botón para cambiar tema
-    boton_tema = ft.ElevatedButton(
-        text="Cambiar tema",
+    boton_tema = ft.Button(
+        text="2",
         on_click=cambiar_tema,
         bgcolor=ft.Colors.BLUE_200,
-        color=ft.Colors.BLACK
+        color=ft.Colors.BLACK,
+        icon= ft.Icons.DARK_MODE_OUTLINED,
+        width= 50 ,
+        height= 30
     )
 
     # Tabs principales
