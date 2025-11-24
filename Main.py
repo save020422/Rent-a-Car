@@ -1,24 +1,24 @@
 import flet as ft
 from ui import *
-from Abtsration import InfoManager, Tourist
-import SystemOfBd as bd
+from Abtsration import InfoManager, Tourist ,SystemBd
+
 #page_init = [False] 
 
 def main(page: ft.Page):
     page.title = "Sistema de Alquiler de Autos"
     page.bgcolor = ft.Colors.BLUE_GREY_900
-
-    user_data = InfoManager()
-    bd.init()
-    bd.TouristBD.insertar_turistas_demo()
-    bd.TouristBD.cargar_turistas(user_data.turistas)
+    #bd =SystemBd
+    info_manager = InfoManager()
+    SystemBd.init_db()
+   # SystemBd.insertar_turistas_demo()
+    SystemBd.cargar_turistas(info_manager.turistas)
 
     
 
     #
 
     # Crear la pestaña de usuarios
-    users_tab = torist_seccion(infomanager=user_data )
+    
 
     # Obtener la tabla desde el contenido de la pestaña
     #visual_data_table = users_tab.content.controls[-1]
@@ -26,8 +26,11 @@ def main(page: ft.Page):
     # Agregar Tabs a la página 
     tabs = ft.Tabs(
         selected_index=0,
-        tabs=[users_tab],
-        expand=1
+        tabs=[torist_seccion(infomanager=info_manager ),
+              cars_seccion(infomanager=info_manager),
+              Contrat_seccion(infomanager=info_manager)],
+        expand=1,
+        animation_duration= 200
     )
     page.add(tabs)
     page.update()
