@@ -1,5 +1,5 @@
 import flet as ft
-from ui import *
+from UI import *
 from Abtsration import InfoManager, Tourist ,SystemBd
 
 #page_init = [False] 
@@ -19,7 +19,9 @@ def main(page: ft.Page):
     # Inicializar sistema
     info_manager = InfoManager()
     SystemBd.init_db()
+    #SystemBd.insertar_turistas_demo()
     SystemBd.cargar_turistas(info_manager.turistas)
+
 
     # Función para cambiar el tema
     def cambiar_tema(e):
@@ -46,16 +48,16 @@ def main(page: ft.Page):
     tabs = ft.Tabs(
         selected_index=0,
         tabs=[
-            torist_seccion(infomanager=info_manager),
-            cars_seccion(infomanager=info_manager),
-            Contrat_seccion(infomanager=info_manager)
+            torist_tab(infomanager=info_manager),
+            
         ],
         expand=1,
-        animation_duration=200
+        animation_duration=200,
+        
     )
 
     # Agregar controles a la página
-    page.add(boton_tema, tabs)
+    page.add( tabs)
     page.update()
 
 # Ejecutar la app

@@ -2,10 +2,10 @@ import flet as ft
 import Abtsration as ab
 import time 
 
-def torist_seccion(infomanager):
+def torist_tab(infomanager):
     tourist = ab.Tourist()
     
-    # Campos de entrada estilizados
+    # inputs seccion
     tourist.name_ = ab.InputBox(
                 label="Nombre del turista",
                 height=40,
@@ -32,11 +32,53 @@ def torist_seccion(infomanager):
     visual_data_table.import_cincro(infomanager=infomanager)
 
   
+    #input seccion build
+   # Lista de países
+    country_list = [
+        "Afganistán", "Alemania", "Argentina", "Australia", "Brasil", "Canadá", "Chile", "China",
+        "Colombia", "Cuba", "Ecuador", "Egipto", "España", "Estados Unidos", "Francia", "India",
+        "Italia", "Japón", "México", "Países Bajos", "Perú", "Reino Unido", "Rusia", "Sudáfrica"
+    ]
+
+    # Campo de texto para filtrar países
+    country_filter = ft.TextField(
+        label="Buscar país",
+        hint_text="Escribe para buscar...",
+        on_change=lambda e: update_country_dropdown(e.control.value),
+        text_style=ft.TextStyle(color=ft.Colors.WHITE),
+        label_style=ft.TextStyle(color=ft.Colors.WHITE),
+        height=40
+    )
+
+    # Dropdown de países
+    country_dropdown = ft.Dropdown(
+        label="Selecciona un país",
+        options=[ft.dropdown.Option(country) for country in country_list],
+        on_change=lambda e: setattr(tourist.country, "value", e.control.value),
+        text_style=ft.TextStyle(color=ft.Colors.BLACK),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
+        #height=40
+    )
+
+    # Campo oculto para almacenar el país seleccionado o escrito
+    tourist.country = ft.TextField(
+        label="Nacionalidad",
+        visible=False
+    )
+
+    # Función para actualizar el dropdown según el filtro
+    def update_country_dropdown(filter_text):
+        filtered = [c for c in country_list if filter_text.lower() in c.lower()]
+        country_dropdown.options = [ft.dropdown.Option(c) for c in filtered]
+        country_dropdown.update()
     column = ft.Column(
         controls=[
             tourist.name_,
             tourist.passport_number,
             tourist.country,
+            #country_dropdown,
+            #country_filter ,
+            
             ft.ElevatedButton(
                 text="Add",
                 icon=ft.Icons.ADD,
@@ -62,144 +104,7 @@ def torist_seccion(infomanager):
     return ft.Tab(
         text="Tourist",
         icon=ft.Icons.PERSON_ADD,
-        content=ft.Row(
-            controls=[column],
-            alignment=ft.MainAxisAlignment.CENTER,
-            vertical_alignment= ft.MainAxisAlignment.START,
-            expand=True
-        )
+        content=column
     )
 
-
-def cars_seccion(infomanager):
-    tourist = ab.Car()
-    
-    # Campos de entrada estilizados
-    tourist.name_ = ft.TextField(
-        label="Nombre del turista",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    tourist.passport_number = ft.TextField(
-        label="Número de pasaporte",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    tourist.country = ft.TextField(
-        label="Nacionalidad",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    # Tabla visual
-    visual_data_table = ab.ShowDataTable()
-    visual_data_table.import_cincro(infomanager=infomanager)
-
-    # Columna con scroll
-    column = ft.Column(
-        controls=[
-            tourist.name_,
-            tourist.passport_number,
-            tourist.country,
-            ft.ElevatedButton(
-                text="Add",
-                icon=ft.Icons.ADD,
-                on_click=lambda _: visual_data_table.add_data(tourist, infomanager)
-            ),
-            visual_data_table
-        ],
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        alignment=ft.MainAxisAlignment.START,
-        
-        scroll="auto",
-        expand=True
-    )
-
-    '''# Refrescar tabla al montar
-    def on_column_mount(e):
-        visual_data_table.import_cincro(infomanager)
-
-    column.on_mount = on_column_mount'''
-
-    
-    return ft.Tab(
-        text="Users",
-        icon=ft.Icons.CAR_RENTAL_SHARP,
-        content=ft.Row(
-            controls=[column],
-            alignment=ft.MainAxisAlignment.CENTER,
-            
-            expand=True
-        )
-    )
-
-
-def Contrat_seccion(infomanager):
-    entity = ab.Car()
-    
-    # Campos de entrada estilizados
-    entity.name_ = ft.TextField(
-        label="Nombre del turista",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    entity.passport_number = ft.TextField(
-        label="Número de pasaporte",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    entity.country = ft.TextField(
-        label="Nacionalidad",
-        height=40,
-        text_style=ft.TextStyle(color=ft.Colors.WHITE),
-        label_style=ft.TextStyle(color=ft.Colors.WHITE)
-    )
-
-    # Tabla visual
-    visual_data_table = ab.ShowDataTable()
-    visual_data_table.import_cincro(infomanager=infomanager)
-
-    # Columna con scroll
-    column = ft.Column(
-        controls=[
-            entity.name_,
-            entity.passport_number,
-            entity.country,
-            ft.ElevatedButton(
-                text="Add",
-                icon=ft.Icons.ADD,
-                on_click=lambda _: visual_data_table.add_data(entidad=entity, infomanager = infomanager)
-            ),
-            visual_data_table
-        ],
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        scroll="auto",
-        expand=True
-    )
-
-    '''# Refrescar tabla al montar
-    def on_column_mount(e):
-        visual_data_table.import_cincro(infomanager)
-
-    column.on_mount = on_column_mount'''
-
-    
-    return ft.Tab(
-        text="Contract",
-        icon=ft.Icons.BOOKMARK_ADD,
-        content=ft.Row(
-            controls=[column],
-            alignment=ft.MainAxisAlignment.CENTER,
-            expand=True
-        )
-    )
 

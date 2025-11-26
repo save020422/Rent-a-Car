@@ -1,8 +1,5 @@
 import flet as ft
-
-
 import os
-
 import sqlite3
 
 class Tourist:
@@ -255,5 +252,6 @@ class SwitsButton(ft.Button):
                 pass
 
 
-
+class QuestCountry():
+    pass
 
