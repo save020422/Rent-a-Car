@@ -236,3 +236,24 @@ class InputBox(ft.TextField):
         self.label = label
 
 
+class SwitsButton(ft.Button):
+    def __init__(self, text = None,page= None, **kwargs):
+       
+
+       super().__init__(text, icon = ft.Icons.LIGHT_MODE,
+                        on_click= lambda _: self.theme_change())
+       self.page = page
+       
+       
+       
+    def theme_change(self):
+            
+            if self.page.theme_mode == ft.ThemeMode.LIGHT:
+                self.page.theme_mode = ft.ThemeMode.DARK
+            else:
+                self.page.theme_mode = ft.ThemeMode.LIGHT
+                pass
+
+
+
+

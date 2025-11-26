@@ -1,5 +1,6 @@
 import flet as ft
 import Abtsration as ab
+import time 
 
 def torist_seccion(infomanager):
     tourist = ab.Tourist()
