@@ -229,7 +229,7 @@ class MyColum(ft.Column):
 class InputBox(ft.TextField):
     def __init__(self,label ="",**kwargs):
         super().__init__(text_align=ft.TextAlign.CENTER,label="",
-                height=30,width=300)
+                height=50,width=300)
         self.label = label
 
 

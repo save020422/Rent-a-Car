@@ -19,7 +19,7 @@ def main(page: ft.Page):
     # Inicializar sistema
     info_manager = InfoManager()
     SystemBd.init_db()
-    #SystemBd.insertar_turistas_demo()
+    SystemBd.insertar_turistas_demo()
     SystemBd.cargar_turistas(info_manager.turistas)
 
 
@@ -57,7 +57,7 @@ def main(page: ft.Page):
     )
 
     # Agregar controles a la página
-    page.add( tabs)
+    page.add(boton_tema, tabs)
     page.update()
 
 # Ejecutar la app

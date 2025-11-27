@@ -41,7 +41,7 @@ def torist_tab(infomanager):
     ]
 
     # Campo de texto para filtrar países
-    country_filter = ft.TextField(
+    country_filter = ab.InputBox(
         label="Buscar país",
         hint_text="Escribe para buscar...",
         on_change=lambda e: update_country_dropdown(e.control.value),
@@ -75,8 +75,8 @@ def torist_tab(infomanager):
         controls=[
             tourist.name_,
             tourist.passport_number,
+            country_dropdown,
             tourist.country,
-            #country_dropdown,
             #country_filter ,
             
             ft.ElevatedButton(
